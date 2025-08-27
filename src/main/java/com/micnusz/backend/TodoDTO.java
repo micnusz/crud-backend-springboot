@@ -1,24 +1,22 @@
 package com.micnusz.backend;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
-@Entity
-public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TodoDTO {
     private Long id;
 
+    @NotBlank(message = "Title cannot be empty")
     private String author;
+    @NotBlank(message = "Title cannot be empty")
     private String title;
+    @NotBlank(message = "Description cannot be empty")
     private String description;
 
-    public Todo() {
+    public TodoDTO() {
     }
 
-    public Todo(String author, String title, String description) {
+    public TodoDTO(Long id, String author, String title, String description) {
+        this.id = id;
         this.author = author;
         this.title = title;
         this.description = description;
