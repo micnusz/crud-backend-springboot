@@ -1,7 +1,8 @@
+version: "3.8"
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: crud-app
+    container_name: crud-postgres # Zmieniam nazwę, żeby była jasność
     environment:
       POSTGRES_DB: myapp_db
       POSTGRES_USER: postgres
@@ -11,6 +12,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  backend: # DODAJ TEN SERVICE DLA SPRING BOOT
+    build: .
+    container_name: spring-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/myapp_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - postgres
     networks:
       - app_network
     restart: unless-stopped

@@ -32,8 +32,8 @@ public class TodoController {
     public Page<Todo> getTodos(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "asc") String direction) {
+            @RequestParam(defaultValue = "createdAT") String sortBy,
+            @RequestParam(defaultValue = "desc") String direction) {
         return todoService.getTodos(page, size, sortBy, direction);
     }
 
@@ -41,7 +41,13 @@ public class TodoController {
     @ResponseStatus(HttpStatus.CREATED)
     public TodoDTO postTodo(@Valid @RequestBody TodoDTO dto) {
         Todo saved = todoService.postTodo(dto);
-        return new TodoDTO(saved.getId(), saved.getAuthor(), saved.getTitle(), saved.getDescription());
+        return new TodoDTO(
+                saved.getId(),
+                saved.getAuthor(),
+                saved.getTitle(),
+                saved.getDescription(),
+                saved.getCreatedAt(),
+                saved.getUpdatedAt());
     }
 
 }
