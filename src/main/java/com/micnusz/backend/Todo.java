@@ -19,10 +19,11 @@ public class Todo {
     private String author;
     private String title;
     private String description;
+    @Column(nullable = false)
+    private Boolean isDone;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     @PrePersist
@@ -39,10 +40,11 @@ public class Todo {
     public Todo() {
     }
 
-    public Todo(String author, String title, String description) {
+    public Todo(String author, String title, String description, Boolean isDone) {
         this.author = author;
         this.title = title;
         this.description = description;
+        this.isDone = isDone;
     }
 
     public String getAuthor() {
@@ -69,6 +71,10 @@ public class Todo {
         return updatedAt;
     }
 
+    public Boolean isDone() {
+        return isDone;
+    }
+
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -91,6 +97,10 @@ public class Todo {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setDone(Boolean done) {
+        this.isDone = done;
     }
 
 }

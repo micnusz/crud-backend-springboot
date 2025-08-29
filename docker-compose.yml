@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   postgres:
-    image: postgres:15-alpine
+    image: postgres:15
     container_name: crud-postgres # Zmieniam nazwę, żeby była jasność
     environment:
       POSTGRES_DB: myapp_db

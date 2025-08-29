@@ -13,6 +13,7 @@ public class TodoDTO {
     private String title;
     @NotBlank(message = "Description cannot be empty")
     private String description;
+    private Boolean isDone;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -20,13 +21,14 @@ public class TodoDTO {
     }
 
     public TodoDTO(Long id, String author, String title, String description, LocalDateTime createdAt,
-            LocalDateTime updatedAt) {
+            LocalDateTime updatedAt, Boolean isDone) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.isDone = isDone;
     }
 
     public String getAuthor() {
@@ -53,6 +55,10 @@ public class TodoDTO {
         return updatedAt;
     }
 
+    public Boolean isDone() {
+        return isDone;
+    }
+
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -75,6 +81,10 @@ public class TodoDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setDone(Boolean done) {
+        this.isDone = done;
     }
 
 }
